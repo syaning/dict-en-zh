@@ -1,0 +1,37 @@
+{
+  "name": "dict-en-zh",
+  "version": "0.1.0",
+  "description": "An English-Chinese dictionary.",
+  "main": "index.js",
+  "bin": {
+    "dict": "./bin/dict.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syaning/dict-en-zh.git"
+  },
+  "keywords": [
+    "dict",
+    "dictionary",
+    "dict-cli",
+    "shanbay",
+    "youdao",
+    "translate",
+    "translation",
+    "english-chinese",
+    "en-zh"
+  ],
+  "author": "Alex Sun <syaningv@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/syaning/dict-en-zh/issues"
+  },
+  "homepage": "https://github.com/syaning/dict-en-zh#readme",
+  "dependencies": {
+    "optimist": "^0.6.1",
+    "request": "^2.72.0"
+  }
+}
