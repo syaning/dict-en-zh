@@ -19,7 +19,7 @@ dict <word>
 as a module:
 
 ```javascript
-const dict = require(dict-en-zh)
+const dict = require('dict-en-zh')
 
 dict('hello')
     .then(console.log)
