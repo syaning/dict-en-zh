@@ -1,5 +1,6 @@
 const request = require('./lib/request')
 const shanbay = require('./lib/source/shanbay')
+const youdao = require('./lib/source/youdao')
 
 function dict(word, source) {
     source = source || 'shanbay'
@@ -22,13 +23,14 @@ function registerSources(sources) {
         }
 
         sources[name] = function(word) {
-            return request(url(word)).then(parse)
+            return request(url(word)).then(res => parse(res, word))
         }
     })
 }
 
 var sources = {
-    shanbay
+    shanbay,
+    youdao
 }
 
 registerSources(sources)

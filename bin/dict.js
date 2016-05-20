@@ -4,18 +4,35 @@ const chalk = require('chalk')
 const argv = require('optimist').argv
 const dict = require('../index')
 
-var word = argv._[0]
+var srcMap = {
+    sb: 'shanbay',
+    shanbay: 'shanbay',
+    yd: 'youdao',
+    youdao: 'youdao'
+}
 
-if (!word) {
-    console.log('dict <word>')
+var help = [
+    'usage: dict <word> [options]',
+    '',
+    'options:',
+    '  -s --src\tspecify a source for query',
+    '  -h --help\tprint this list and exit',
+    '',
+    'sources:',
+    '  sb shanbay\thttps://www.shanbay.com/',
+    '  yd youdao\thttp://dict.youdao.com/'
+].join('\n')
+
+var word = argv._[0]
+if (!word || argv.h || argv.help) {
+    console.log(help)
     return
 }
 
-var indent = str => '  ' + str
-var ul = str => '- ' + str
-var title = str => '# ' + str
+var src = argv.s || argv.src
+src = srcMap[src] || srcMap.shanbay
 
-dict(word)
+dict[src](word)
     .then(data => {
         if (data.err) {
             return console.log(chalk.red(data.err))
@@ -23,25 +40,41 @@ dict(word)
 
         console.log(chalk.green('\n' + indent(data.word) + '\n'))
 
-        var pronunciations = Object.keys(data.pronunciations)
-            .map(k => indent(ul(k + ' ')) + chalk.yellow('[' + data.pronunciations[k] + ']'))
-            .join('\n')
-        console.log(chalk.gray(title('pronunciations')) + '\n')
-        console.log(pronunciations, '\n')
+        var pron = data.pron
+        var prons = Object.keys(pron).filter(k => !!pron[k])
+        if (prons.length) {
+            prons = prons.map(k => k + ' ' + chalk.yellow(pron[k]))
+            console.log(title('pronunciations'))
+            console.log(indent(ul(prons)).join('\n') + '\n')
+        }
 
-        var cn_definitions = data.cn_definitions.map(def => indent(ul(def))).join('\n')
-        console.log(chalk.gray(title('cn definitions')) + '\n')
-        console.log(cn_definitions, '\n')
+        var cnDefs = data.def.cn
+        if (cnDefs.length) {
+            console.log(title('cn definitions'))
+            console.log(indent(ul(cnDefs)).join('\n') + '\n')
+        }
 
-        var en_definitions = []
-        Object.keys(data.en_definitions).forEach(k => {
-            var defs = data.en_definitions[k]
-            defs.forEach(def => {
-                en_definitions.push(indent(ul(k + '. ' + def)))
+        var enDefs = data.def.en
+        var poses = Object.keys(enDefs)
+        if (poses.length) {
+            console.log(title('en definitions'))
+            poses.forEach(pos => {
+                console.log(pos)
+                var defs = indent(ul(enDefs[pos])).join('\n')
+                console.log(defs)
             })
-        })
-        en_definitions = en_definitions.join('\n')
-        console.log(chalk.gray(title('en definitions')) + '\n')
-        console.log(en_definitions)
+        }
     })
     .catch(console.trace)
+
+function title(str) {
+    return chalk.gray('# ' + str + '\n')
+}
+
+function ul(str) {
+    return Array.isArray(str) ? str.map(ul) : '- ' + str
+}
+
+function indent(str) {
+    return Array.isArray(str) ? str.map(indent) : '  ' + str
+}
