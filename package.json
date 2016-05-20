@@ -1,6 +1,6 @@
 {
   "name": "dict-en-zh",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "An English-Chinese dictionary.",
   "main": "index.js",
   "bin": {
