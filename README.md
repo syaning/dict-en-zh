@@ -2,6 +2,8 @@
 
 An English-Chinese dictionary.
 
+![screenshot](./screenshot.png)
+
 ### Install
 
 ```
