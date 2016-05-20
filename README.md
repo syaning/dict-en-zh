@@ -1,6 +1,6 @@
 # dict-en-zh
 
-An English-Chinese dictionary.
+An English-Chinese dictionary, both cli and a node module.
 
 ![screenshot](./screenshot.png)
 
@@ -10,23 +10,27 @@ An English-Chinese dictionary.
 npm install dict-en-zh
 ```
 
-### Usage
-
-as a command:
+### CLI
 
 ```
-dict <word>
+dict <word> [options]
 ```
 
-as a module:
+to get help information, use `dict -h` or `dict --help`.
+
+### Module
 
 ```javascript
 const dict = require('dict-en-zh')
 
-dict('hello')
-    .then(console.log)
-    .catch(console.trace)
+dict('echo').then(console.log).catch(console.trace)
 ```
+
+### API
+
+- `dict(word[, source='shanbay'])` , which is identical to `dict[source](word)`
+- `dict.shanbay(word)`
+- `dict.youdao(word)`
 
 ### License
 
