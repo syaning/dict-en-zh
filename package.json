@@ -1,6 +1,6 @@
 {
   "name": "dict-en-zh",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An English-Chinese dictionary.",
   "main": "index.js",
   "bin": {
@@ -24,7 +24,11 @@
     "english-chinese",
     "en-zh"
   ],
-  "author": "Alex Sun <syaningv@gmail.com>",
+  "author": {
+    "name": "Alex Sun",
+    "email": "syaningv@gmail.com",
+    "url": "syaning.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/syaning/dict-en-zh/issues"

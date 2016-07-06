@@ -6,8 +6,8 @@ An English-Chinese dictionary, both cli and a node module.
 
 ### Install
 
-```
-npm install dict-en-zh
+```sh
+$ npm install dict-en-zh
 ```
 
 ### CLI
@@ -34,4 +34,4 @@ dict('echo').then(console.log).catch(console.trace)
 
 ### License
 
-MIT
+[MIT](./LICENSE)
