@@ -7,7 +7,7 @@ An English-Chinese dictionary, both cli and a node module.
 ### Install
 
 ```sh
-$ npm install dict-en-zh
+$ npm install -g dict-en-zh
 ```
 
 ### CLI
